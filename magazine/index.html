@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPORTSWORLD Magazine | By Glen Mbwaya</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Roboto:wght@300;400;500;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            background: #f5f5f5;
+            color: #333;
+            padding: 20px;
+        }
+        
+        .magazine-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* COVER PAGE */
+        .cover-page {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 30, 60, 0.8), rgba(0, 60, 120, 0.9)), 
+                        url('https://images.unsplash.com/photo-1542751110-97427bbecf20?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px;
+            position: relative;
+        }
+        
+        .cover-logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 5.5rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: #FFD700;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #FFD700; }
+            to { text-shadow: 0 0 20px #FF4500, 0 0 30px #FFD700; }
+        }
+        
+        .cover-subtitle {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+            max-width: 800px;
+        }
+        
+        .cover-author {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+        
+        .cover-issue {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            font-size: 1.1rem;
+        }
+        
+        /* MAGAZINE PAGES */
+        .magazine-page {
+            padding: 60px 50px;
+            min-height: 100vh;
+            page-break-inside: avoid;
+            position: relative;
+        }
+        
+        .page-header {
+            border-bottom: 3px solid #1E90FF;
+            padding-bottom: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .page-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.8rem;
+            color: #1E90FF;
+            text-transform: uppercase;
+        }
+        
+        .section {
+            margin-bottom: 60px;
+            padding: 25px;
+            border-radius: 10px;
+            background: #f9f9f9;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+        }
+        
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 15px;
+            padding-left: 15px;
+            border-left: 5px solid #FF4500;
+        }
+        
+        .section-content {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .section-text {
+            flex: 1;
+        }
+        
+        .section-image {
+            flex: 0 0 300px;
+            height: 200px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .section-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .section:hover .section-image img {
+            transform: scale(1.05);
+        }
+        
+        /* SPORT-SPECIFIC COLORS */
+        .football { border-top: 4px solid #228B22; }
+        .basketball { border-top: 4px solid #FF8C00; }
+        .athletics { border-top: 4px solid #DC143C; }
+        .cricket { border-top: 4px solid #8B4513; }
+        .rugby { border-top: 4px solid #00008B; }
+        .tennis { border-top: 4px solid #32CD32; }
+        .volleyball { border-top: 4px solid #FF69B4; }
+        .boxing { border-top: 4px solid #B22222; }
+        .martial-arts { border-top: 4px solid #2E8B57; }
+        .motorsports { border-top: 4px solid #696969; }
+        .swimming { border-top: 4px solid #00BFFF; }
+        .women-sports { border-top: 4px solid #FF1493; }
+        .youth-sports { border-top: 4px solid #FFD700; }
+        .technology { border-top: 4px solid #4682B4; }
+        .training { border-top: 4px solid #8A2BE2; }
+        .business { border-top: 4px solid #228B22; }
+        .athletes { border-top: 4px solid #FF4500; }
+        
+        /* TWO-COLUMN LAYOUT */
+        .two-column {
+            column-count: 2;
+            column-gap: 40px;
+        }
+        
+        /* INFOGRAPHICS */
+        .infographic {
+            background: linear-gradient(135deg, #1E90FF, #00BFFF);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 25px 0;
+            box-shadow: 0 8px 20px rgba(30, 144, 255, 0.3);
+        }
+        
+        .infographic-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        /* SCHOOL BRANDING */
+        .school-header {
+            background: linear-gradient(to right, #1E3A8A, #3B82F6);
+            color: white;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .school-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-circle {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #1E3A8A;
+            font-size: 1.5rem;
+        }
+        
+        .logo-text {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.3rem;
+        }
+        
+        .project-info {
+            text-align: right;
+            font-size: 0.9rem;
+        }
+        
+        /* ANIMATIONS */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animated {
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        /* PAGE NUMBERS */
+        .page-number {
+            position: absolute;
+            bottom: 20px;
+            right: 40px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* FOOTER */
+        .magazine-footer {
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+        }
+        
+        /* PRINT STYLES */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .magazine-container {
+                box-shadow: none;
+            }
+            
+            .school-header {
+                position: static;
+            }
+            
+            .page-break {
+                page-break-before: always;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="magazine-container">
+        
+        <!-- SCHOOL BRANDING HEADER -->
+        <div class="school-header">
+            <div class="school-logo">
+                <div class="logo-circle">GM</div>
+                <div class="logo-text">GLEN MBWAYA'S SPORTSWORLD</div>
+            </div>
+            <div class="project-info">
+                School Magazine Project<br>
+                Physical Education Department<br>
+                Volume 1, Issue 1
+            </div>
+        </div>
+        
+        <!-- COVER PAGE -->
+        <div class="cover-page">
+            <div class="cover-logo">SPORTSWORLD</div>
+            <div class="cover-subtitle">From the Field to the Future: A Complete Guide to Sports, Technology, and Human Achievement</div>
+            <div class="cover-issue">SCHOOL EDITION • VOLUME 1</div>
+            <div class="cover-author">By Glen Mbwaya</div>
+        </div>
+        
+        <!-- TABLE OF CONTENTS PAGE -->
+        <div class="magazine-page page-break">
+            <div class="page-header">
+                <h1 class="page-title">Table of Contents</h1>
+            </div>
+            
+            <div class="two-column animated">
+                <div class="infographic">
+                    <div class="infographic-title">📊 SPORTS BY NUMBERS</div>
+                    <div class="stat-item">
+                        <span>Most Popular Sport:</span>
+                        <span>Football (4B fans)</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Fastest Ball Sport:</span>
+                        <span>Badminton (300+ km/h)</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Oldest Sport:</span>
+                        <span>Wrestling (15,000 years)</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Olympic Sports:</span>
+                        <span>33 different sports</span>
+                    </div>
+                </div>
+                
+                <h3 style="color: #1E90FF; margin-top: 20px;">TEAM SPORTS</h3>
+                <ul style="margin-bottom: 25px;">
+                    <li>Football - The Beautiful Game</li>
+                    <li>Basketball - Fast-Paced Action</li>
+                    <li>Cricket - Strategy & Skill</li>
+                    <li>Rugby - Power & Teamwork</li>
+                    <li>Volleyball - Above the Net</li>
+                </ul>
+                
+                <h3 style="color: #FF4500; margin-top: 20px;">INDIVIDUAL SPORTS</h3>
+                <ul style="margin-bottom: 25px;">
+                    <li>Athletics - Speed & Strength</li>
+                    <li>Tennis - Elegance & Intensity</li>
+                    <li>Boxing - The Sweet Science</li>
+                    <li>Martial Arts - Discipline & Respect</li>
+                    <li>Swimming - Grace in Water</li>
+                    <li>Motorsports - Speed & Technology</li>
+                </ul>
+                
+                <h3 style="color: #228B22; margin-top: 20px;">SPECIAL FEATURES</h3>
+                <ul style="margin-bottom: 25px;">
+                    <li>Women in Sports: Breaking Barriers</li>
+                    <li>Youth Sports: Building Futures</li>
+                    <li>Sports Technology: The Digital Revolution</li>
+                    <li>Training & Nutrition: Fuel for Champions</li>
+                    <li>Sports Psychology: Mind Games</li>
+                    <li>Sports Business: The Money Game</li>
+                    <li>Famous Athletes: Legends of the Game</li>
+                </ul>
+            </div>
+            <div class="page-number">Page 1</div>
+        </div>
+        
+        <!-- FOOTBALL SECTION -->
+        <div class="magazine-page page-break">
+            <div class="page-header">
+                <h1 class="page-title">The Beautiful Game</h1>
+            </div>
+            
+            <div class="section football animated">
+                <h2 class="section-title">⚽ Football / Soccer</h2>
+                <div class="section-content">
+                    <div class="section-text">
+                        <p>Football, known as soccer in some countries, is the world's most popular sport with over 4 billion fans globally. Played between two teams of eleven players, the objective is simple: score more goals than your opponent by getting the ball into the opposing team's net.</p>
+                        <p>The modern game originated in England in the 19th century, with the first official rules established in 1863. Today, it's governed internationally by FIFA (Fédération Internationale de Football Association), which organizes the prestigious FIFA World Cup every four years—the most-watched sporting event on Earth.</p>
+                        <p>Football requires a combination of stamina, speed, skill, and strategic thinking. Players specialize in positions: forwards (attack), midfielders (link play), defenders (defense), and goalkeepers (prevent goals). The game is played on a rectangular field with goals at each end, typically lasting 90 minutes divided into two 45-minute halves.</p>
+                    </div>
+                    <div class="section-image">
+                        <img src="https://images.unsplash.com/photo-1575361204480-aadea25e6e68?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Football Action">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="two-column">
+                <h3 style="color: #228B22; margin: 20px 0;">Key Facts:</h3>
+                <ul>
+                    <li><strong>Most World Cup wins:</strong> Brazil (5 titles)</li>
+                    <li><strong>Top scorer (international):</strong> Cristiano Ronaldo (Portugal)</li>
+                    <li><strong>Largest stadium:</strong> Rungrado 1st of May Stadium (North Korea, 114,000 capacity)</li>
+                    <li><strong>First World Cup:</strong> 1930 in Uruguay</li>
+                    <li><strong>Women's World Cup:</strong> First held in 1991, USA has most wins (4)</li>
+                </ul>
+                
+                <h3 style="color: #228B22; margin: 20px 0;">Modern Developments:</h3>
+                <p>Technology has transformed football with Video Assistant Referee (VAR) systems, goal-line technology, and advanced performance analytics. The sport continues to evolve with changes in tactics, training methods, and global expansion.</p>
+            </div>
+            <div class="page-number">Page 2</div>
+        </div>
+        
+        <!-- BASKETBALL SECTION -->
+        <div class="magazine-page page-break">
+            <div class="page-header">
+                <h1 class="page-title">Fast-Paced & High-Flying</h1>
+            </div>
+            
+            <div class="section basketball animated">
+                <h2 class="section-title">🏀 Basketball</h2>
+                <div class="section-content">
+                    <div class="section-text">
+                        <p>Invented in 1891 by Canadian physical education instructor James Naismith in Springfield, Massachusetts, basketball was originally conceived as an indoor sport to keep athletes active during cold winters. The first game used a soccer ball and two peach baskets as goals.</p>
+                        <p>The NBA (National Basketball Association), founded in 1946, has grown into a global phenomenon with superstars like Michael Jordan, LeBron James, and Stephen Curry becoming international icons. The game is played between two teams of five players on a rectangular court, with the primary objective being to shoot a basketball through the defender's hoop while preventing the opposing team from doing the same.</p>
+                        <p>Basketball emphasizes agility, jumping ability (vertical leap), hand-eye coordination, and strategic play. Key skills include dribbling (bouncing the ball while moving), shooting, passing, rebounding, and defensive maneuvers.</p>
+                    </div>
+                    <div class="section-image">
+                        <img src="https://www.rockstaracademy.com/lib/images/news/basketball.jpeg" alt="Basketball Action">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="infographic">
+                <div class="infographic-title">🏀 BASKETBALL POSITIONS</div>
+                <div class="stat-item">
+                    <span>Point Guard (PG):</span>
+                    <span>Playmaker, ball handler</span>
+                </div>
+                <div class="stat-item">
+                    <span>Shooting Guard (SG):</span>
+                    <span>Primary scorer, perimeter shooter</span>
+                </div>
+                <div class="stat-item">
+                    <span>Small Forward (SF):</span>
+                    <span>Versatile scorer and defender</span>
+                </div>
+                <div class="stat-item">
+                    <span>Power Forward (PF):</span>
+                    <span>Rebounder, inside scorer</span>
+                </div>
+                <div class="stat-item">
+                    <span>Center (C):</span>
+                    <span>Tallest player, rim protector</span>
+                </div>
+            </div>
+            <div class="page-number">Page 3</div>
+        </div>
+        
+        <!-- SPORTS TECHNOLOGY SECTION -->
+        <div class="magazine-page page-break">
+            <div class="page-header">
+                <h1 class="page-title">The Digital Revolution in Sports</h1>
+            </div>
+            
+            <div class="section technology animated">
+                <h2 class="section-title">📱 Sports Technology</h2>
+                <div class="section-content">
+                    <div class="section-text">
+                        <p>Technology has transformed every aspect of sports, from training and performance analysis to officiating and fan engagement. Modern athletes have access to tools that would have seemed like science fiction just decades ago.</p>
+                        <p><strong>Wearable Technology:</strong> Smart watches, fitness trackers, and specialized sensors monitor heart rate, speed, acceleration, fatigue levels, and even hydration status in real-time. GPS trackers in player vests provide data on distance covered, sprint speeds, and movement patterns.</p>
+                        <p><strong>Video Technology:</strong> Hawk-Eye systems in tennis and cricket track ball trajectory with millimeter precision. VAR (Video Assistant Referee) in football helps officials make accurate decisions. Instant replay has become standard in most professional sports.</p>
+                        <p><strong>Biomechanics:</strong> Motion capture technology and force plates analyze movement patterns to optimize technique and prevent injuries. 3D motion analysis helps swimmers, golfers, and track athletes perfect their form.</p>
+                    </div>
+                    <div class="section-image">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sports Technology">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="two-column">
+                <h3 style="color: #4682B4; margin: 20px 0;">Emerging Technologies:</h3>
+                <ul>
+                    <li><strong>Artificial Intelligence:</strong> AI analyzes game footage to identify patterns and strategies</li>
+                    <li><strong>Virtual Reality:</strong> VR training simulates game situations without physical risk</li>
+                    <li><strong>Smart Equipment:</strong> Basketballs with sensors, smart shoes that track performance</li>
+                    <li><strong>Biometric Monitoring:</strong> Real-time tracking of athlete physiology during competition</li>
+                    <li><strong>E-Sports Integration:</strong> Traditional sports organizations investing in gaming</li>
+                </ul>
+                
+                <h3 style="color: #4682B4; margin: 20px 0;">Fan Experience Tech:</h3>
+                <p>Technology isn't just for athletes. Fans now enjoy 360-degree video, augmented reality experiences, second-screen apps with advanced statistics, and personalized content delivery. Stadiums feature high-speed Wi-Fi, contactless payment systems, and interactive displays.</p>
+            </div>
+            <div class="page-number">Page 4</div>
+        </div>
+        
+        <!-- FAMOUS ATHLETES SECTION -->
+        <div class="magazine-page page-break">
+            <div class="page-header">
+                <h1 class="page-title">Legends of the Game</h1>
+            </div>
+            
+            <div class="section athletes animated">
+                <h2 class="section-title">🌟 Famous Athletes</h2>
+                <div class="section-content">
+                    <div class="section-text">
+                        <p>Throughout history, certain athletes have transcended their sports to become global icons, inspiring millions with their talent, dedication, and character. These legends have not only achieved remarkable success but have also contributed to the growth and popularity of their respective sports.</p>
+                        <p><strong>Serena Williams (Tennis):</strong> Considered one of the greatest tennis players of all time, Williams has won 23 Grand Slam singles titles—the most by any player in the Open Era. Her powerful style of play revolutionized women's tennis, and she remained at the top of the sport for over two decades.</p>
+                        <p><strong>Usain Bolt (Athletics):</strong> The fastest human ever recorded, Bolt holds world records in the 100m (9.58 seconds) and 200m (19.19 seconds). The Jamaican sprinter won eight Olympic gold medals and became known for his charismatic personality and iconic "Lightning Bolt" celebration.</p>
+                        <p><strong>Michael Phelps (Swimming):</strong> With 28 Olympic medals (23 gold), Phelps is the most decorated Olympian of all time. His dedication to training—swimming up to 80,000 meters per week—and his unique physical attributes (wingspan longer than his height) made him uniquely suited for swimming dominance.</p>
+                    </div>
+                    <div class="section-image">
+                        <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Famous Athletes">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="two-column">
+                <h3 style="color: #FF4500; margin: 20px 0;">More Sporting Icons:</h3>
+                <ul>
+                    <li><strong>Muhammad Ali (Boxing):</strong> "The Greatest" won the world heavyweight championship three times and was known for his social activism and charismatic personality</li>
+                    <li><strong>Micheline Mervil (Martial Arts):</strong> Pioneering female martial artist who broke barriers in traditionally male-dominated sports</li>
+                    <li><strong>Lewis Hamilton (Motorsports):</strong> Seven-time Formula 1 World Champion who has advocated for diversity in motorsports</li>
+                    <li><strong>Simone Biles (Gymnastics):</strong> Most decorated American gymnast with 32 Olympic and World Championship medals</li>
+                    <li><strong>Megan Rapinoe (Football):</strong> World Cup champion and advocate for equal pay and LGBTQ+ rights</li>
+                </ul>
+                
+                <div class="infographic" style="margin-top: 20px;">
+                    <div class="infographic-title">🏆 RECORD BREAKERS</div>
+                    <div class="stat-item">
+                        <span>Most Career Goals:</span>
+                        <span>Josef Bican (805)</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Most NBA Points:</span>
+                        <span>LeBron James (40,000+)</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Fastest 100m:</span>
+                        <span>Usain Bolt (9.58s)</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Most Grand Slams:</span>
+                        <span>Margaret Court (24)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="page-number">Page 5</div>
+        </div>
+        
+        <!-- CONCLUSION -->
+        <div class="magazine-page page-break">
+            <div class="page-header">
+                <h1 class="page-title">The Future of Sports</h1>
+            </div>
+            
+            <div class="animated" style="text-align: center; padding: 40px 20px;">
+                <div style="font-size: 2rem; color: #1E90FF; margin-bottom: 20px;">🏆 🥇 🏅</div>
+                <h2 style="font-family: 'Oswald', sans-serif; font-size: 2.5rem; color: #333; margin-bottom: 30px;">
+                    Where Do We Go From Here?
+                </h2>
+                
+                <div class="two-column" style="text-align: left; margin-top: 40px;">
+                    <p>Sports continue to evolve at an unprecedented pace. Technology will make training more personalized, equipment smarter, and competitions fairer. We'll see increased emphasis on mental health, with sports psychology becoming as important as physical training.</p>
+                    
+                    <p>Inclusivity will drive change—more opportunities for women, athletes with disabilities, and participants from all backgrounds. E-sports will continue to grow, potentially becoming part of the Olympic program.</p>
+                    
+                    <p>Sustainability will become crucial as sports organizations address their environmental impact through green stadiums, reduced travel, and eco-friendly equipment.</p>
+                    
+                    <p>Ultimately, sports will remain a powerful force for bringing people together, promoting health, and inspiring excellence. Whether you're a professional athlete or a weekend enthusiast, there's never been a more exciting time to be involved in sports.</p>
+                </div>
+                
+                <div style="margin-top: 50px; padding: 30px; background: linear-gradient(135deg, #1E90FF, #00BFFF); color: white; border-radius: 10px;">
+                    <h3 style="font-family: 'Oswald', sans-serif; font-size: 1.8rem;">Glen Mbwaya's Final Thoughts</h3>
+                    <p style="margin-top: 15px; font-size: 1.1rem;">"Sports teach us about perseverance, teamwork, and striving for excellence. They show us what humans are capable of achieving. As we look to the future, let's remember that at its heart, sport is about joy, community, and pushing our limits—both individually and collectively."</p>
+                </div>
+            </div>
+            
+            <div class="page-number">Page 6</div>
+        </div>
+        
+        <!-- FOOTER -->
+        <div class="magazine-footer">
+            <h3>SPORTSWORLD MAGAZINE</h3>
+            <p>Volume 1 | School Edition | By Glen Mbwaya</p>
+            <p style="margin-top: 15px; opacity: 0.8;">© 2024 SportsWorld. All rights reserved. This magazine was created for educational purposes.</p>
+            <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.6;">Images sourced from Unsplash. Content researched and written by Glen Mbwaya.</p>
+        </div>
+    </div>
+
+    <script>
+        // Add scroll animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.animated');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animatedElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(el);
+            });
+            
+            // School branding animation
+            const logo = document.querySelector('.logo-circle');
+            logo.addEventListener('mouseover', function() {
+                this.style.transform = 'rotate(360deg)';
+                this.style.transition = 'transform 0.8s ease';
+            });
+            
+            logo.addEventListener('mouseout', function() {
+                this.style.transform = 'rotate(0deg)';
+            });
+        });
+        
+        // Print/PDF instructions
+        console.log("To save as PDF: Press Ctrl+P (Cmd+P on Mac) and choose 'Save as PDF' as your printer.");
+    </script>
+</body>
+</html>
